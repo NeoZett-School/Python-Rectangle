@@ -32,19 +32,24 @@ class _PhysicsBox(Box):
         if y is None:
             x, y = x
         self.velocity += (x, y)
-    def resolve_collision(self, other: Box) -> str:
+    def resolve_collision(self, other: Box) -> Optional[str]:
         if self.rect.intersects(other.rect):
-            if self.rect.bottom > other.rect.top and self.rect.top < other.rect.top:
-                self.rect.bottom = other.rect.top
-                return "top"
-            if self.rect.top < other.rect.bottom and self.rect.bottom > other.rect.bottom:
+            overlap_top = abs(self.rect.top - other.rect.bottom)
+            overlap_bottom = abs(self.rect.bottom - other.rect.top)
+            overlap_left = abs(self.rect.left - other.rect.right)
+            overlap_right = abs(self.rect.right - other.rect.left)
+            smallest_overlap = min(overlap_top, overlap_bottom, overlap_left, overlap_right)
+            if smallest_overlap == overlap_top:
                 self.rect.top = other.rect.bottom
+                return "top"
+            elif smallest_overlap == overlap_bottom:
+                self.rect.bottom = other.rect.top
                 return "bottom"
-            if self.rect.right > other.rect.left and self.rect.left < other.rect.left:
-                self.rect.right = other.rect.left
-                return "left"
-            if self.rect.left < other.rect.right and self.rect.right > other.rect.right:
+            elif smallest_overlap == overlap_left:
                 self.rect.left = other.rect.right
+                return "left"
+            elif smallest_overlap == overlap_right:
+                self.rect.right = other.rect.left
                 return "right"
     def update(self, delta_time: float = 1.0) -> None:
         self.rect.move(self.velocity * delta_time)

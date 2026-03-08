@@ -9,7 +9,8 @@ class Box(PhysicsBox):
 
     def __init__(self, surface: pygame.Surface, rect: Rect,
                  color: ColorLike, static: bool = False, 
-                 grid: Optional[SpatialGrid] = None, use_detail: bool = False) -> None:
+                 grid: Optional[SpatialGrid] = None, 
+                 use_detail: bool = False) -> None:
         super().__init__(surface, rect, color, static, use_detail)
         self.ground_level = surface.get_height()
         self.acceleration = Vector(0, 0)
@@ -26,29 +27,23 @@ class Box(PhysicsBox):
             if event.key == pygame.K_SPACE and self.grounded:
                 self.velocity.y = -self.jump_force
                 self.grounded = False
-    def resolve_collision(self, other: Box):
+    def resolve_collision(self, other: Box) -> None:
         side = PhysicsBox.resolve_collision(self, other)
+        if side is None:
+            return
+
+        if side == "bottom":
+            self.velocity.y = min(self.velocity.y, 0)
+            self.grounded = True
+            return
+
         if hasattr(other, "static") and not other.static:
-            # Handle dynamic object collisions
             if side == "top":
-                # If standing on top, only adjust self's velocity
-                self.velocity.y = min(self.velocity.y, 0)
-                self.grounded = True
-            elif side == "bottom":
-                # If hitting the bottom, swap velocities
                 self.velocity.y, other.velocity.y = other.velocity.y, self.velocity.y
-            elif side == "left":
-                # Collision from the left, swap horizontal velocities
-                self.velocity.x, other.velocity.x = other.velocity.x, self.velocity.x
-            elif side == "right":
-                # Collision from the right, swap horizontal velocities
+            elif side in ("left", "right"):
                 self.velocity.x, other.velocity.x = other.velocity.x, self.velocity.x
         else:
-            # Handle static object collisions
             if side == "top":
-                self.velocity.y = min(self.velocity.y, 0)
-                self.grounded = True
-            elif side == "bottom":
                 self.velocity.y = max(self.velocity.y, 0)
             elif side == "left":
                 self.velocity.x = min(self.velocity.x, 0)
@@ -56,7 +51,8 @@ class Box(PhysicsBox):
                 self.velocity.x = max(self.velocity.x, 0)
     def update(self, pressed_keys: pygame.key.ScancodeWrapper, delta_time: float = 1.0) -> None:
         self.acceleration.xy = (0, 0)
-        self.acceleration.y += self.gravity
+        if not self.static:
+            self.acceleration.y += self.gravity
         if len(pressed_keys) > 0:
             move = pressed_keys[pygame.K_d] - pressed_keys[pygame.K_a]
         else:
@@ -80,4 +76,6 @@ class Box(PhysicsBox):
             self.grounded = False
         if self.grid is not None:
             for obj in self.grid.get_nearby_objects(self.rect):
+                if obj is self:
+                    continue
                 self.resolve_collision(obj)

@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Set, Any
 from .core import Rect
 
 class SpatialGrid:
@@ -34,7 +34,7 @@ class SpatialGrid:
                 if (x, y) in self.cells:
                     self.cells[(x, y)].remove(obj)
 
-    def get_nearby_objects(self, rect: Rect) -> None:
+    def get_nearby_objects(self, rect: Rect) -> Set[Any]:
         """Get all objects in the same or neighboring cells."""
         x1, y1, x2, y2 = self._get_cell_coords(rect)
         nearby_objects = set()

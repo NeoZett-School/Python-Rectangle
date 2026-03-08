@@ -376,7 +376,7 @@ class Rect(RectLike):
                     r.top >= self.top and
                     r.bottom <= self.bottom
                 )
-            else:  # CoordinateLike
+            elif len(other) == 2:  # CoordinateLike
                 x, y = other
                 return (
                     self.left <= x <= self.right and
@@ -400,7 +400,7 @@ class Rect(RectLike):
                     r.top > self.bottom or
                     r.bottom < self.top
                 )
-            else:  # CoordinateLike
+            elif len(other) == 2:  # CoordinateLike
                 x, y = other
                 return (
                     self.left <= x <= self.right and
