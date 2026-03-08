@@ -1,6 +1,5 @@
 from Rectangle import pygame_phys_premade as rtngle_phys_premade
 from Rectangle import pygame_phys as rtngle_phys
-from Rectangle.spatial_grid import SpatialGrid
 from Rectangle import Rect, Color
 import pygame
 import sys
@@ -14,7 +13,7 @@ clock = pygame.time.Clock()
 WHITE = Color(255, 255, 255)
 ORANGE = Color(255, 125, 0)
 
-grid = SpatialGrid(cell_size=100, width=WIDTH, height=HEIGHT)
+grid = rtngle_phys.Grid(cell_size=100, width=WIDTH, height=HEIGHT)
 
 player = rtngle_phys_premade.Box(
     surface = screen, 
@@ -27,7 +26,7 @@ grid.add_object(player, player.rect)
 
 box = rtngle_phys.Box(
     surface = screen, 
-    rect = Rect(70, HEIGHT-70, 50, 50), 
+    rect = Rect(0, HEIGHT-45, 500, 25), 
     color = ORANGE, 
 )
 

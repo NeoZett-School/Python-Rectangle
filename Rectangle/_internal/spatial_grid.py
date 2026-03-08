@@ -1,5 +1,7 @@
-from typing import Set, Any
-from .core import Rect
+from typing import Set, Tuple, Dict, Generic, TypeVar, Any
+from .core import Numeric, Rect
+
+T = TypeVar("T")
 
 class SpatialGrid:
     __all__ = ("cell_size", "grid_width", "grid_height", "cells", "_old_rects")
@@ -49,3 +51,10 @@ class SpatialGrid:
         old_rect = Rect(self._old_rects[id(obj)])
         self.remove_object(obj, old_rect)
         self.add_object(obj, new_rect)
+
+class UniformGrid(Generic[T], SpatialGrid):
+    cells: Dict[Tuple[Numeric, Numeric], T]
+    def add_object(self, obj: T, rect: Rect) -> None: ...
+    def remove_object(self, obj: T, rect: Rect) -> None: ...
+    def get_nearby_objects(self, rect: Rect) -> Set[T]: ...
+    def update(self, obj: T, new_rect: Rect) -> None: ...

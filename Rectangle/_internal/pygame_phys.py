@@ -1,9 +1,17 @@
-from typing import Union, Optional, Any, overload
+from typing import Union, Set, Tuple, Dict, Optional, Generic, TypeVar, overload
 from abc import ABC, abstractmethod
 from .prefab import RectBox
 from .pygame import BoxRenderer
 from .core import Numeric, ColorLike, Vector, Rect
+from .spatial_grid import UniformGrid
 import pygame
+
+T = TypeVar("T")
+
+class Grid(UniformGrid["Box"]):
+    def render_all(self) -> None:
+        for box in self.cells.values():
+            box.render()
 
 class Box:
     """The box is a uniform rectangle with a renderer, called a box and boxrenderer when also including an optional surface."""

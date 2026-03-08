@@ -1,7 +1,9 @@
 from ._internal.spatial_grid import (
-    SpatialGrid
+    SpatialGrid,
+    UniformGrid
 )
 
 __all__ = (
     "SpatialGrid", 
+    "UniformGrid"
 )
