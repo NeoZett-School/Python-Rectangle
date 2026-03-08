@@ -79,7 +79,7 @@ sys.exit()
 
 ### Tkinter Example
 
-```pygame
+```python
 import tkinter as tk
 from Rectangle import tkinter as rtngle_tk
 from Rectangle import Rect
