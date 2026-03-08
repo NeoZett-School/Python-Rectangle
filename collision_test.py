@@ -32,10 +32,22 @@ box1 = rtngle_phys.Box(
 grid.add_object(box1)
 box2 = rtngle_phys.Box(
     surface = screen, 
-    rect = Rect(60, HEIGHT-145, WIDTH-60, 25), 
+    rect = Rect(100, HEIGHT-145, WIDTH-100, 25), 
     color = ORANGE, 
 )
 grid.add_object(box2)
+box3 = rtngle_phys.Box(
+    surface = screen, 
+    rect = Rect(0, HEIGHT-245, WIDTH-100, 25), 
+    color = ORANGE, 
+)
+grid.add_object(box3)
+box4 = rtngle_phys.Box(
+    surface = screen, 
+    rect = Rect(100, HEIGHT-345, WIDTH-100, 25), 
+    color = ORANGE, 
+)
+grid.add_object(box4)
 
 active = True
 while active:
