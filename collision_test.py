@@ -19,6 +19,7 @@ player = rtngle_phys_premade.Box(
     surface = screen, 
     rect = Rect(10, 10, 50, 50), 
     color = ORANGE, 
+    grid = grid, 
 )
 
 grid.add_object(player, player.rect)

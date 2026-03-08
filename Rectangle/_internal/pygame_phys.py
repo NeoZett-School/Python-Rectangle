@@ -19,10 +19,11 @@ class Box:
         self.renderer.render()
 
 class _PhysicsBox(Box):
-    __all__ = ("surface", "renderer", "velocity")
-    def __init__(self, surface: pygame.Surface, rect: Rect, color: ColorLike, use_detail: bool = False) -> None:
+    __all__ = ("surface", "renderer", "velocity", "static")
+    def __init__(self, surface: pygame.Surface, rect: Rect, color: ColorLike, static: bool = False, use_detail: bool = False) -> None:
         Box.__init__(self, surface, rect, color, use_detail)
         self.velocity = Vector(0, 0)
+        self.static = static
     @overload
     def apply_force(self, x: Numeric, y: Numeric) -> None: ...
     @overload
@@ -31,6 +32,20 @@ class _PhysicsBox(Box):
         if y is None:
             x, y = x
         self.velocity += (x, y)
+    def resolve_collision(self, other: Box) -> str:
+        if self.rect.intersects(other.rect):
+            if self.rect.bottom > other.rect.top and self.rect.top < other.rect.top:
+                self.rect.bottom = other.rect.top
+                return "top"
+            if self.rect.top < other.rect.bottom and self.rect.bottom > other.rect.bottom:
+                self.rect.top = other.rect.bottom
+                return "bottom"
+            if self.rect.right > other.rect.left and self.rect.left < other.rect.left:
+                self.rect.right = other.rect.left
+                return "left"
+            if self.rect.left < other.rect.right and self.rect.right > other.rect.right:
+                self.rect.left = other.rect.right
+                return "right"
     def update(self, delta_time: float = 1.0) -> None:
         self.rect.move(self.velocity * delta_time)
 
