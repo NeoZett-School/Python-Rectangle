@@ -1,4 +1,4 @@
-from typing import Union, Set, Tuple, Dict, Optional, Generic, TypeVar, overload
+from typing import Union, Optional, overload
 from abc import ABC, abstractmethod
 from .prefab import RectBox
 from .pygame import BoxRenderer
@@ -6,9 +6,13 @@ from .core import Numeric, ColorLike, Vector, Rect
 from .spatial_grid import UniformGrid
 import pygame
 
-T = TypeVar("T")
-
 class Grid(UniformGrid["Box"]):
+    def add_object(self, obj: "Box") -> None:
+        UniformGrid.add_object(self, obj, obj.rect)
+    def remove_object(self, obj: "Box") -> None:
+        UniformGrid.remove_object(obj, obj.rect)
+    def update(self, obj: "Box") -> None:
+        UniformGrid.update(self, obj, obj.rect)
     def render_all(self) -> None:
         for position in self.cells.values():
             for box in position:

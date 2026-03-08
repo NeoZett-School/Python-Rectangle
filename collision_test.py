@@ -22,15 +22,20 @@ player = rtngle_phys_premade.Box(
     grid = grid, 
 )
 
-grid.add_object(player, player.rect)
+grid.add_object(player)
 
-box = rtngle_phys.Box(
+box1 = rtngle_phys.Box(
     surface = screen, 
-    rect = Rect(0, HEIGHT-45, 500, 25), 
+    rect = Rect(0, HEIGHT-45, WIDTH-100, 25), 
     color = ORANGE, 
 )
-
-grid.add_object(box, box.rect)
+grid.add_object(box1)
+box2 = rtngle_phys.Box(
+    surface = screen, 
+    rect = Rect(20, HEIGHT-70, WIDTH-20, 25), 
+    color = ORANGE, 
+)
+grid.add_object(box2)
 
 active = True
 while active:
@@ -44,8 +49,9 @@ while active:
 
     player.update(pressed_keys, dt)
 
-    grid.update(player, player.rect)
-    grid.update(box, box.rect)
+    grid.update(player)
+    grid.update(box1)
+    grid.update(box2)
     grid.render_all()
 
     pygame.display.flip()
