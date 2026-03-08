@@ -49,8 +49,8 @@ class SpatialGrid:
     def update(self, obj: Any, new_rect: Rect) -> None:
         """Update an object's position in the grid."""
         old_rect = Rect(self._old_rects[id(obj)])
-        self.remove_object(obj, old_rect)
-        self.add_object(obj, new_rect)
+        SpatialGrid.remove_object(self, obj, old_rect)
+        SpatialGrid.add_object(self, obj, new_rect)
 
 class UniformGrid(Generic[T], SpatialGrid):
     cells: Dict[Tuple[Numeric, Numeric], List[T]]

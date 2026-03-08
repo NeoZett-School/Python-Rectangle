@@ -13,8 +13,7 @@ class Grid(UniformGrid["Box"]):
         old_rect = Rect(self._old_rects[id(obj)])
         UniformGrid.remove_object(obj, old_rect)
     def update(self, obj: "Box") -> None:
-        self.remove_object(obj)
-        self.add_object(obj)
+        UniformGrid.update(self, obj, obj.rect)
     def render_all(self) -> None:
         for position in self.cells.values():
             for box in position:
