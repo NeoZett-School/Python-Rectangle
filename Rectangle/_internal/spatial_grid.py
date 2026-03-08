@@ -54,7 +54,11 @@ class SpatialGrid:
 
 class UniformGrid(Generic[T], SpatialGrid):
     cells: Dict[Tuple[Numeric, Numeric], T]
-    def add_object(self, obj: T, rect: Rect) -> None: ...
-    def remove_object(self, obj: T, rect: Rect) -> None: ...
-    def get_nearby_objects(self, rect: Rect) -> Set[T]: ...
-    def update(self, obj: T, new_rect: Rect) -> None: ...
+    def add_object(self, obj: T, rect: Rect) -> None: 
+        SpatialGrid.add_object(self, obj, rect)
+    def remove_object(self, obj: T, rect: Rect) -> None: 
+        SpatialGrid.remove_object(self, obj, rect)
+    def get_nearby_objects(self, rect: Rect) -> Set[T]: 
+        SpatialGrid.get_nearby_objects(self, rect)
+    def update(self, obj: T, new_rect: Rect) -> None: 
+        SpatialGrid.update(self, obj, new_rect)
