@@ -1,4 +1,4 @@
-from typing import Set, Tuple, Dict, Generic, TypeVar, Any
+from typing import Set, List, Tuple, Dict, Generic, TypeVar, Any
 from .core import Numeric, Rect
 
 T = TypeVar("T")
@@ -7,7 +7,7 @@ class SpatialGrid:
     cell_size: int
     grid_width: int
     grid_height: int
-    cells: Dict[Tuple[Numeric, Numeric], Any]
+    cells: Dict[Tuple[Numeric, Numeric], List[Any]]
 
     def __init__(self, cell_size: int, width: int, height: int) -> None: ...
     def _get_cell_coords(self, rect: Rect) -> None: ...
@@ -17,7 +17,7 @@ class SpatialGrid:
     def update(self, obj: Any, new_rect: Rect) -> None: ...
 
 class UniformGrid(Generic[T], SpatialGrid):
-    cells: Dict[Tuple[Numeric, Numeric], T]
+    cells: Dict[Tuple[Numeric, Numeric], List[T]]
     def add_object(self, obj: T, rect: Rect) -> None: ...
     def remove_object(self, obj: T, rect: Rect) -> None: ...
     def get_nearby_objects(self, rect: Rect) -> Set[T]: ...

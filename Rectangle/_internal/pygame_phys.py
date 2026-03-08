@@ -10,8 +10,10 @@ T = TypeVar("T")
 
 class Grid(UniformGrid["Box"]):
     def render_all(self) -> None:
-        for box in self.cells.values():
-            box.render()
+        for position in self.cells.values():
+            for box in position:
+                print(box)
+                box.render()
 
 class Box:
     """The box is a uniform rectangle with a renderer, called a box and boxrenderer when also including an optional surface."""
