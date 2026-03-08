@@ -1,4 +1,5 @@
 from Rectangle import pygame_phys_premade as rtngle_phys_premade
+from Rectangle.spatial_grid import SpatialGrid
 from Rectangle import Rect, Color
 import pygame
 import sys
@@ -12,16 +13,23 @@ clock = pygame.time.Clock()
 WHITE = Color(255, 255, 255)
 ORANGE = Color(255, 125, 0)
 
-box = rtngle_phys_premade.Box(
+grid = SpatialGrid(cell_size=100, width=WIDTH, height=HEIGHT)
+
+player = rtngle_phys_premade.Box(
     surface = screen, 
     rect = Rect(10, 10, 50, 50), 
     color = ORANGE, 
-    use_detail = True
 )
 
-white_packed = WHITE.pack()
-for x in range(50):
-    box.surface[x, 25] = white_packed
+grid.add_object(player, player.rect)
+
+box = rtngle_phys_premade.Box(
+    surface = screen, 
+    rect = Rect(70, 70, 50, 50), 
+    color = ORANGE, 
+)
+
+grid.add_object(box, box.rect)
 
 active = True
 while active:
@@ -29,12 +37,18 @@ while active:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             active = False
-        box.handle_event(event)
+        player.handle_event(event)
     pressed_keys = pygame.key.get_pressed()
     screen.fill(WHITE)
 
-    box.update(pressed_keys, dt)
+    player.update(pressed_keys, dt)
+    player.render()
+
+    box.update([], dt)
     box.render()
+
+    grid.update(player, player.rect)
+    grid.update(box, box.rect)
 
     pygame.display.flip()
 

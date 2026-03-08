@@ -25,7 +25,10 @@ class Box(PhysicsBox):
     def update(self, pressed_keys: pygame.key.ScancodeWrapper, delta_time: float = 1.0) -> None:
         self.acceleration.xy = (0, 0)
         self.acceleration.y += self.gravity
-        move = pressed_keys[pygame.K_d] - pressed_keys[pygame.K_a]
+        if len(pressed_keys) > 0:
+            move = pressed_keys[pygame.K_d] - pressed_keys[pygame.K_a]
+        else:
+            move = 0
         accel = self.ground_accel if self.grounded else self.air_accel
         self.acceleration.x += move * accel
         self.velocity += self.acceleration * delta_time

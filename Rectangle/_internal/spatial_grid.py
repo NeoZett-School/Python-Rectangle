@@ -16,7 +16,7 @@ class SpatialGrid:
         """Get the grid cell coordinates for a given rectangle."""
         x1, y1 = rect.x // self.cell_size, rect.y // self.cell_size
         x2, y2 = (rect.x + rect.width) // self.cell_size, (rect.y + rect.height) // self.cell_size
-        return x1, y1, x2, y2
+        return int(x1), int(y1), int(x2), int(y2)
 
     def add_object(self, obj: Any, rect: Rect) -> None:
         """Add an object to the grid based on its rectangle."""
