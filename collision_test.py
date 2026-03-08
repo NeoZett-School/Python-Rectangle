@@ -1,4 +1,5 @@
 from Rectangle import pygame_phys_premade as rtngle_phys_premade
+from Rectangle import pygame_phys as rtngle_phys
 from Rectangle.spatial_grid import SpatialGrid
 from Rectangle import Rect, Color
 import pygame
@@ -24,9 +25,9 @@ player = rtngle_phys_premade.Box(
 
 grid.add_object(player, player.rect)
 
-box = rtngle_phys_premade.Box(
+box = rtngle_phys.Box(
     surface = screen, 
-    rect = Rect(70, 70, 50, 50), 
+    rect = Rect(70, HEIGHT-70, 50, 50), 
     color = ORANGE, 
 )
 
@@ -45,7 +46,6 @@ while active:
     player.update(pressed_keys, dt)
     player.render()
 
-    box.update([], dt)
     box.render()
 
     grid.update(player, player.rect)
