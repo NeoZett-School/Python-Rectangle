@@ -43,12 +43,10 @@ while active:
     screen.fill(WHITE)
 
     player.update(pressed_keys, dt)
-    player.render()
-
-    box.render()
 
     grid.update(player, player.rect)
     grid.update(box, box.rect)
+    grid.render_all()
 
     pygame.display.flip()
 
