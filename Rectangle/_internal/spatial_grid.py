@@ -59,6 +59,6 @@ class UniformGrid(Generic[T], SpatialGrid):
     def remove_object(self, obj: T, rect: Rect) -> None: 
         SpatialGrid.remove_object(self, obj, rect)
     def get_nearby_objects(self, rect: Rect) -> Set[T]: 
-        SpatialGrid.get_nearby_objects(self, rect)
+        return SpatialGrid.get_nearby_objects(self, rect)
     def update(self, obj: T, new_rect: Rect) -> None: 
         SpatialGrid.update(self, obj, new_rect)
