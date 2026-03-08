@@ -21,8 +21,15 @@ player = rtngle_phys_premade.Box(
     color = ORANGE, 
     grid = grid, 
 )
-
 grid.add_object(player)
+
+movable_box = rtngle_phys_premade.Box(
+    surface = screen, 
+    rect = Rect(70, 10, 50, 50), 
+    color = ORANGE, 
+    grid = grid, 
+)
+grid.add_object(movable_box)
 
 box1 = rtngle_phys.Box(
     surface = screen, 
@@ -60,8 +67,10 @@ while active:
     screen.fill(WHITE)
 
     player.update(pressed_keys, dt)
+    movable_box.update([], dt)
 
     grid.update(player)
+    grid.update(movable_box)
     grid.update(box1)
     grid.update(box2)
     grid.render_all()
