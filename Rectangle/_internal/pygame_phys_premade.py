@@ -31,20 +31,19 @@ class Box(PhysicsBox):
         side = PhysicsBox.resolve_collision(self, other)
         if side is None:
             return
-
-        if side == "bottom":
-            self.velocity.y = min(self.velocity.y, 0)
-            self.grounded = True
-            return
-
         if hasattr(other, "static") and not other.static:
-            if side == "top":
+            if side in ("top", "bottom"):
                 self.velocity.y, other.velocity.y = other.velocity.y, self.velocity.y
+                if side == "bottom":
+                    self.grounded = True
             elif side in ("left", "right"):
                 self.velocity.x, other.velocity.x = other.velocity.x, self.velocity.x
         else:
             if side == "top":
                 self.velocity.y = max(self.velocity.y, 0)
+            elif side == "bottom":
+                self.velocity.y = min(self.velocity.y, 0)
+                self.grounded = True
             elif side == "left":
                 self.velocity.x = min(self.velocity.x, 0)
             elif side == "right":
