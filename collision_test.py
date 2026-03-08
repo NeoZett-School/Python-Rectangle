@@ -32,7 +32,7 @@ box1 = rtngle_phys.Box(
 grid.add_object(box1)
 box2 = rtngle_phys.Box(
     surface = screen, 
-    rect = Rect(20, HEIGHT-70, WIDTH-20, 25), 
+    rect = Rect(60, HEIGHT-145, WIDTH-60, 25), 
     color = ORANGE, 
 )
 grid.add_object(box2)
