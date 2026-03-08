@@ -12,7 +12,6 @@ class Grid(UniformGrid["Box"]):
     def render_all(self) -> None:
         for position in self.cells.values():
             for box in position:
-                print(box)
                 box.render()
 
 class Box:
