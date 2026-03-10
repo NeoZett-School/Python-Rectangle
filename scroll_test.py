@@ -13,6 +13,8 @@ clock = pygame.time.Clock()
 WHITE = Color(255, 255, 255)
 ORANGE = Color(255, 125, 0)
 
+SCROLL_DIST = 50
+
 grid = rtngle_phys.Grid(cell_size=100, width=WIDTH, height=HEIGHT)
 
 player = rtngle_phys_premade.Box(
@@ -74,13 +76,13 @@ while active:
     movable_box.update([], dt)
 
     if pressed_keys[pygame.K_a] and player.rect.left < 50:
-        player.rect.left += player.max_speed
+        player.rect.left += SCROLL_DIST
         for obj in objects:
-            obj.rect.left += player.max_speed
+            obj.rect.left += SCROLL_DIST
     elif pressed_keys[pygame.K_d] and player.rect.right > WIDTH - 50:
-        player.rect.right -= player.max_speed
+        player.rect.right -= SCROLL_DIST
         for obj in objects:
-            obj.rect.right -= player.max_speed
+            obj.rect.right -= SCROLL_DIST
 
     grid.update(player)
     grid.update(movable_box)
