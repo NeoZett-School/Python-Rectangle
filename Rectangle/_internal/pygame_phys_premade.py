@@ -2,7 +2,14 @@ from typing import Optional
 from .pygame_phys import Box, PhysicsBox
 from .core import ColorLike, Vector, Rect
 from .spatial_grid import SpatialGrid
+from .keybinds import Keybinds
 import pygame
+
+default_keybinds = Keybinds({
+    "jump": pygame.K_SPACE,
+    "left": pygame.K_a,
+    "right": pygame.K_d
+})
 
 class Box(PhysicsBox):
     """The premade physics box, called box in premade physics, is adaptive and pursuasive. You can easily create a box and create new games with custom collision."""
@@ -10,6 +17,7 @@ class Box(PhysicsBox):
     def __init__(self, surface: pygame.Surface, rect: Rect,
                  color: ColorLike, static: bool = False, 
                  grid: Optional[SpatialGrid] = None, 
+                 keybinds: Optional[Keybinds] = None, 
                  use_detail: bool = False) -> None:
         super().__init__(surface, rect, color, static, use_detail)
         self.ground_level = surface.get_height()
@@ -21,10 +29,11 @@ class Box(PhysicsBox):
         self.ground_accel = 2000
         self.air_accel = 900
         self.friction = 1800
+        self.keybinds = keybinds or default_keybinds
         self.grid = grid
     def handle_event(self, event: pygame.event.Event) -> None:
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE and self.grounded:
+            if event.key == self.keybinds.mapping["jump"] and self.grounded:
                 self.velocity.y = -self.jump_force
                 self.grounded = False
     def resolve_collision(self, other: Box) -> None:
@@ -53,7 +62,8 @@ class Box(PhysicsBox):
         if not self.static:
             self.acceleration.y += self.gravity
         if len(pressed_keys) > 0:
-            move = pressed_keys[pygame.K_d] - pressed_keys[pygame.K_a]
+            mapped_keys = self.keybinds.sort_pressed(pressed_keys)
+            move = mapped_keys["right"] - mapped_keys["left"]
         else:
             move = 0
         accel = self.ground_accel if self.grounded else self.air_accel

@@ -1,5 +1,5 @@
-from ._internal.pygame_phys_premade import Box
+from ._internal.pygame_phys_premade import default_keybinds, Box
 
 __all__ = (
-    "Box",
+    "default_keybinds", "Box",
 )
