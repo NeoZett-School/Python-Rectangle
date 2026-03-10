@@ -7,17 +7,21 @@ from .spatial_grid import UniformGrid
 import pygame
 
 class Grid(UniformGrid["Box"]):
+    def __init__(self, cell_size: int, width: int, height: int) -> None:
+        UniformGrid.__init__(self, cell_size, width, height)
+        self._objects = []
     def add_object(self, obj: "Box") -> None:
         UniformGrid.add_object(self, obj, obj.rect)
+        self._objects.append(obj)
     def remove_object(self, obj: "Box") -> None:
         old_rect = Rect(self._old_rects[id(obj)])
         UniformGrid.remove_object(obj, old_rect)
+        self._objects.remove(obj)
     def update(self, obj: "Box") -> None:
         UniformGrid.update(self, obj, obj.rect)
     def render_all(self) -> None:
-        for position in self.cells.values():
-            for box in position:
-                box.render()
+        for box in self._objects:
+            box.render()
 
 class Box:
     """The box is a uniform rectangle with a renderer, called a box and boxrenderer when also including an optional surface."""
