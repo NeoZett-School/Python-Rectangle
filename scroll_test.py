@@ -14,7 +14,7 @@ WHITE = Color(255, 255, 255)
 ORANGE = Color(255, 125, 0)
 
 SCROLL_DIST = -1
-SCROLL_AT = 100
+SCROLL_AT = 200
 
 grid = rtngle_phys.Grid(cell_size=100, width=WIDTH, height=HEIGHT)
 
