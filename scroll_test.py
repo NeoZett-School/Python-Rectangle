@@ -28,7 +28,7 @@ grid.add_object(player)
 
 movable_box = rtngle_phys_premade.Box(
     surface = screen, 
-    rect = Rect(70, 10, 50, 50), 
+    rect = Rect(WIDTH//2, 10, 50, 50), 
     color = ORANGE, 
     grid = grid, 
 )
