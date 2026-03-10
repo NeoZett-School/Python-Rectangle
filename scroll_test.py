@@ -59,10 +59,6 @@ box4 = rtngle_phys.Box(
 )
 grid.add_object(box4)
 
-objects = [
-    box1, box2, box3, box4, movable_box
-]
-
 active = True
 while active:
     dt = clock.tick(60.0) / 1000
@@ -77,12 +73,10 @@ while active:
     movable_box.update([], dt)
 
     if pressed_keys[pygame.K_a] and player.rect.left < SCROLL_AT:
-        player.rect.left += SCROLL_DIST
-        for obj in objects:
+        for obj in grid:
             obj.rect.left += SCROLL_DIST
     elif pressed_keys[pygame.K_d] and player.rect.right > WIDTH - SCROLL_AT:
-        player.rect.right -= SCROLL_DIST
-        for obj in objects:
+        for obj in grid:
             obj.rect.right -= SCROLL_DIST
 
     grid.update(player)

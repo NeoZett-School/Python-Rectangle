@@ -1,4 +1,4 @@
-from typing import Union, Optional, overload
+from typing import Union, Iterable, Optional, overload
 from abc import ABC, abstractmethod
 from .prefab import RectBox
 from .pygame import BoxRenderer
@@ -22,6 +22,8 @@ class Grid(UniformGrid["Box"]):
     def render_all(self) -> None:
         for box in self._objects:
             box.render()
+    def __iter__(self) -> Iterable["Box"]:
+        return iter(self._objects)
 
 class Box:
     """The box is a uniform rectangle with a renderer, called a box and boxrenderer when also including an optional surface."""
