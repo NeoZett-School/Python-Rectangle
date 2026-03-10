@@ -83,7 +83,7 @@ while active:
             if SCROLL_DIST > 0:
                 obj.rect.right -= SCROLL_DIST
             else:
-                obj.rect.right -= SCROLL_DIST
+                obj.rect.right += player.velocity.x
 
     grid.update(player)
     grid.update(movable_box)
