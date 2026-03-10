@@ -14,6 +14,7 @@ WHITE = Color(255, 255, 255)
 ORANGE = Color(255, 125, 0)
 
 SCROLL_DIST = 200
+SCROLL_AT = 100
 
 grid = rtngle_phys.Grid(cell_size=100, width=WIDTH, height=HEIGHT)
 
@@ -75,11 +76,11 @@ while active:
     player.update(pressed_keys, dt)
     movable_box.update([], dt)
 
-    if pressed_keys[pygame.K_a] and player.rect.left < 50:
+    if pressed_keys[pygame.K_a] and player.rect.left < SCROLL_AT:
         player.rect.left += SCROLL_DIST
         for obj in objects:
             obj.rect.left += SCROLL_DIST
-    elif pressed_keys[pygame.K_d] and player.rect.right > WIDTH - 50:
+    elif pressed_keys[pygame.K_d] and player.rect.right > WIDTH - SCROLL_AT:
         player.rect.right -= SCROLL_DIST
         for obj in objects:
             obj.rect.right -= SCROLL_DIST
