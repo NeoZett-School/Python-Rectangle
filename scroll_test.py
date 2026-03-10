@@ -77,13 +77,13 @@ while active:
             if SCROLL_DIST > 0:
                 obj.rect.left += SCROLL_DIST
             else:
-                obj.rect.left += player.velocity.x
+                obj.rect.left -= player.velocity.x
     elif pressed_keys[pygame.K_d] and player.rect.right > WIDTH - SCROLL_AT:
         for obj in grid:
             if SCROLL_DIST > 0:
                 obj.rect.right -= SCROLL_DIST
             else:
-                obj.rect.right += player.velocity.x
+                obj.rect.right -= player.velocity.x
 
     grid.update(player)
     grid.update(movable_box)
