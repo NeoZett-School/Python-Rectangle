@@ -1,6 +1,7 @@
 # General test is variable to new tests. We customize for general tasks and try for new features with a new perspective over already tested and new features.
 
 from Rectangle import Rect, Color
+import Rectangle.prefab
 import Rectangle.pygame
 import Rectangle
 import pygame, sys
@@ -17,6 +18,12 @@ camera = Rectangle.pygame.camera.Camera(grid)
 
 WHITE = Color(255, 255, 255)
 ORANGE = Color(255, 125, 0)
+
+# What it does internally + physics ------------------------------------------
+other = Rectangle.prefab.RectBox(10, 10, 100, 100, ORANGE, setup=False)
+other_renderer = Rectangle.pygame.BoxRenderer(other, screen)
+# You can now modify other.rect directly to move the object.
+# ----------------------------------------------------------------------------
 
 player = Rectangle.pygame.premade.Box(
     surface = screen, 
@@ -42,6 +49,8 @@ while active:
         player.handle_event(event)
     pressed_keys = pygame.key.get_pressed()
     screen.fill(WHITE)
+
+    other_renderer.render()
     
     grid.update(player, pressed_keys, delta_time)
     camera.adjust_x(player, delta_time, 200)
