@@ -114,6 +114,7 @@ Rectangle/
 ├── keybinds.py
 ├── spatial_grid.py
 ├── pygame.py
+├── pygame_camera.py
 ├── pygame_phys.py
 ├── pygame_phys_premade.py
 ├── tkinter.py
@@ -125,6 +126,7 @@ Rectangle/
     ├── keybinds.py
     ├── spatial_grid.py
     ├── pygame.py
+    ├── pygame_camera.py
     ├── pygame_phys.py
     ├── pygame_phys_premade.py
     ├── tkinter.py
