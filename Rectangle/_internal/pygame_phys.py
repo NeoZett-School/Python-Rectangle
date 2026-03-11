@@ -18,7 +18,7 @@ class Grid(UniformGrid["Box"]):
         UniformGrid.remove_object(obj, old_rect)
         self._objects.remove(obj)
     def update(self, obj: "Box", *args: Any, **kwargs: Any) -> None:
-        if hasattr(obj, "update"):
+        if hasattr(obj, "update") and args or kwargs:
             obj.update(*args, **kwargs)
         UniformGrid.update(self, obj, obj.rect)
     def render_all(self) -> None:
