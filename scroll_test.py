@@ -1,5 +1,5 @@
-from Rectangle import pygame_phys_premade as rtngle_phys_premade
-from Rectangle import pygame_phys as rtngle_phys
+from Rectangle.pygame import premade as rtngle_premade
+from Rectangle.pygame import physics as rtngle_phys
 from Rectangle import Rect, Color
 import pygame
 import sys
@@ -18,7 +18,7 @@ SCROLL_AT = 200
 
 grid = rtngle_phys.Grid(cell_size=100, width=WIDTH, height=HEIGHT)
 
-player = rtngle_phys_premade.Box(
+player = rtngle_premade.Box(
     surface = screen, 
     rect = Rect(10, 10, 50, 50), 
     color = ORANGE, 
@@ -26,7 +26,7 @@ player = rtngle_phys_premade.Box(
 )
 grid.add_object(player)
 
-movable_box = rtngle_phys_premade.Box(
+movable_box = rtngle_premade.Box(
     surface = screen, 
     rect = Rect(WIDTH//2, 10, 50, 50), 
     color = ORANGE, 

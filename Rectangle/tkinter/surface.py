@@ -1,4 +1,4 @@
-from ._internal.tkinter_surf import (
+from .._internal.tkinter.surface import (
     InterfaceSurface, 
     InterfaceTool, 
     AutomaticRenderer, 

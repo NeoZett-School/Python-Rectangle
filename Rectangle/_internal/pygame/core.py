@@ -1,8 +1,8 @@
 from typing import Union, Sequence, List, Tuple, Optional, Any
-from .core import (
+from ..core import (
     CoordinateLike, RectLike, ColorLike, Coordinate, Rect, Surface
 )
-from .prefab import RectBox, SquareBox, AnyBox
+from ..prefab import RectBox, SquareBox, AnyBox
 import pygame
 
 class InterfaceSurface(Surface):

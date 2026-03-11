@@ -1,5 +1,5 @@
 from typing import Union, Optional, Self
-from .core import Rect, RectLike
+from ..core import Rect, RectLike
 import tkinter as tk
 
 class Grid(Rect):

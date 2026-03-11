@@ -1,7 +1,7 @@
 from typing import Optional
-from .pygame_phys import Box, PhysicsBox
-from .core import ColorLike, Vector, Rect
-from .spatial_grid import SpatialGrid
+from .physics import Box, PhysicsBox
+from ..core import ColorLike, Vector, Rect
+from ..spatial_grid import SpatialGrid
 from .keybinds import Keybinds
 import pygame
 

@@ -1,10 +1,10 @@
 from typing import Union, Sequence, List, Tuple, Optional
 import tkinter as tk
 
-from .core import (
+from ..core import (
     CoordinateLike, RectLike, ColorLike, Coordinate, Rect, Surface, Color
 )
-from .prefab import RectBox, SquareBox
+from ..prefab import RectBox, SquareBox
 
 class InterfaceSurface(Surface):
     pass

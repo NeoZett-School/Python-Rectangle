@@ -1,4 +1,4 @@
-from ._internal.pygame_phys import (
+from .._internal.pygame.physics import (
     Grid, Box, PhysicsBox, update
 )
 

@@ -1,4 +1,4 @@
-from ._internal.tkinter import (
+from .._internal.tkinter.core import (
     Grid, CanvasRoot, RectGridAdapter, 
     RectBox, RootMatrix, RowLayout, ColumnLayout, 
     GridLayout, 

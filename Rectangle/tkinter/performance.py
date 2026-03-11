@@ -1,12 +1,10 @@
-from ._internal.pygame import (
+from .._internal.tkinter.performance import (
     InterfaceSurface, 
     InterfaceTool, 
     AutomaticRenderer, 
     BoxRenderer, 
     accustom_screen, 
-    create_screen, 
-    translate_surface, 
-    translate_rect
+    create_screen,
 )
 
 __all__ = (
@@ -15,7 +13,5 @@ __all__ = (
     "AutomaticRenderer", 
     "BoxRenderer", 
     "accustom_screen", 
-    "create_screen", 
-    "translate_surface", 
-    "translate_rect"
+    "create_screen",
 )

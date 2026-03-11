@@ -111,27 +111,33 @@ Rectangle/
 ├── __init__.py
 ├── core.py
 ├── prefab.py
-├── keybinds.py
 ├── spatial_grid.py
-├── pygame.py
-├── pygame_camera.py
-├── pygame_phys.py
-├── pygame_phys_premade.py
-├── tkinter.py
-├── tkinter_pref.py
-├── tkinter_surf.py
+├── pygame/
+|   ├── __init__.py
+|   ├── core.py
+|   ├── camera.py
+|   ├── keybinds.py
+|   ├── physics.py
+|   └── premade.py
+├── tkinter/
+|   ├── __init__.py
+|   ├── core.py
+|   ├── performance.py
+|   └── surface.py
 └── _internal/
     ├── core.py
     ├── prefab.py
     ├── keybinds.py
     ├── spatial_grid.py
-    ├── pygame.py
-    ├── pygame_camera.py
-    ├── pygame_phys.py
-    ├── pygame_phys_premade.py
-    ├── tkinter.py
-    ├── tkinter_perf.py
-    └── tkinter_surf.py
+    ├── pygame/
+    |   ├── core.py
+    |   ├── camera.py
+    |   ├── physics.py
+    |   ├── premade.py
+    └── tkinter/
+        ├── core.py
+        ├── performance.py
+        └── surface.py
 ```
 
 ---

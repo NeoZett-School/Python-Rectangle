@@ -2,10 +2,10 @@
 
 from Rectangle import Rect, Color
 import Rectangle.pygame as rctngle_pg
-import Rectangle.pygame_phys as rctngle_phys
-import Rectangle.pygame_phys_premade as rctngle_premade
-import Rectangle.keybinds as rctngle_kbnds
-import Rectangle.pygame_camera as rctngle_camera
+import Rectangle.pygame.physics as rctngle_phys
+import Rectangle.pygame.premade as rctngle_premade
+import Rectangle.pygame.keybinds as rctngle_kbnds
+import Rectangle.pygame.camera as rctngle_camera
 import Rectangle as rctngle
 import pygame
 import sys

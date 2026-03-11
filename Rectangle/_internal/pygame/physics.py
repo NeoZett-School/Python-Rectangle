@@ -1,9 +1,9 @@
 from typing import Union, Iterable, Optional, Any, overload
 from abc import ABC, abstractmethod
-from .prefab import RectBox
-from .pygame import BoxRenderer
-from .core import Numeric, ColorLike, Vector, Rect
-from .spatial_grid import UniformGrid
+from ..prefab import RectBox
+from .core import BoxRenderer
+from ..core import Numeric, ColorLike, Vector, Rect
+from ..spatial_grid import UniformGrid
 import pygame
 
 class Grid(UniformGrid["Box"]):
