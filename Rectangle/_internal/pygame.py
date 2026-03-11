@@ -1,4 +1,4 @@
-from typing import Union, Sequence, List, Tuple, Optional
+from typing import Union, Sequence, List, Tuple, Optional, Any
 from .core import (
     CoordinateLike, RectLike, ColorLike, Coordinate, Rect, Surface
 )
@@ -36,20 +36,23 @@ class AutomaticRenderer:
                 pygame.draw.polygon(self.pygame_surface, color, rect.vertices)
 
 class BoxRenderer:
-    __all__ = ("box_surface_tool", "box_surface_rect", "pygame_surface", "use_detail")
+    __all__ = ("box_surface_tool", "box_surface_rect", "pygame_surface", "use_detail", "cover_surface")
 
-    def __init__(self, box_surface: Union[RectBox, SquareBox], pygame_surface: pygame.Surface, use_detail: bool = False) -> None:
+    def __init__(self, box_surface: Union[RectBox, SquareBox], pygame_surface: pygame.Surface, use_detail: bool = False, cover_surface: Optional[pygame.Surface] = None) -> None:
         self.box_surface_tool = InterfaceTool(box_surface)
         self.box_surface_rect = box_surface.rect
         self.pygame_surface = pygame_surface
         self.use_detail = use_detail
+        self.cover_surface = cover_surface
         box_surface.set_detail(use_detail)
     def render(self) -> None:
         if self.use_detail:
             self.pygame_surface.blit(self.box_surface_tool.translate_to_pygame(), translate_rect(self.box_surface_rect))
-        else:
+        elif self.cover_surface is None:
             for rect, color in self.box_surface_tool.rectangles():
                 pygame.draw.polygon(self.pygame_surface, color, rect.vertices)
+        else:
+             self.pygame_surface.blit(self.cover_surface, self.box_surface_rect)
 
 def accustom_screen(screen: pygame.Surface, background_color: ColorLike = (0, 0, 0), use_detail: bool = False) -> Tuple[RectBox, AutomaticRenderer]:
     surf = RectBox((0, 0, *screen.get_size()), background_color)

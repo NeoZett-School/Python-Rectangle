@@ -18,8 +18,9 @@ class Box(PhysicsBox):
                  color: ColorLike, static: bool = False, 
                  grid: Optional[SpatialGrid] = None, 
                  keybinds: Optional[Keybinds] = None, 
-                 use_detail: bool = False) -> None:
-        super().__init__(surface, rect, color, static, use_detail)
+                 use_detail: bool = False, 
+                 cover_surface: Optional[pygame.Surface] = None) -> None:
+        super().__init__(surface, rect, color, static, use_detail, cover_surface)
         self.ground_level = surface.get_height()
         self.acceleration = Vector(0, 0)
         self.grounded = False

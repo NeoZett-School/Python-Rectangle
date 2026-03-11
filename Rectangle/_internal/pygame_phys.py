@@ -31,9 +31,9 @@ class Box:
     """The box is a uniform rectangle with a renderer, called a box and boxrenderer when also including an optional surface."""
 
     __all__ = ("surface", "renderer")
-    def __init__(self, surface: pygame.Surface, rect: Rect, color: ColorLike, use_detail: bool = False) -> None:
+    def __init__(self, surface: pygame.Surface, rect: Rect, color: ColorLike, use_detail: bool = False, cover_surface: Optional[pygame.Surface] = None) -> None:
         self.surface = RectBox(rect, color)
-        self.renderer = BoxRenderer(self.surface, surface, use_detail)
+        self.renderer = BoxRenderer(self.surface, surface, use_detail, cover_surface)
     @property
     def rect(self) -> Rect:
         return self.surface.rect
@@ -42,8 +42,8 @@ class Box:
 
 class _PhysicsBox(Box):
     __all__ = ("surface", "renderer", "velocity", "static")
-    def __init__(self, surface: pygame.Surface, rect: Rect, color: ColorLike, static: bool = False, use_detail: bool = False) -> None:
-        Box.__init__(self, surface, rect, color, use_detail)
+    def __init__(self, surface: pygame.Surface, rect: Rect, color: ColorLike, static: bool = False, use_detail: bool = False, cover_surface: Optional[pygame.Surface] = None) -> None:
+        Box.__init__(self, surface, rect, color, use_detail, cover_surface)
         self.velocity = Vector(0, 0)
         self.static = static
     @overload
