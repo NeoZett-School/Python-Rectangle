@@ -1,4 +1,4 @@
-from typing import Union, Iterable, Optional, overload
+from typing import Union, Iterable, Optional, Any, overload
 from abc import ABC, abstractmethod
 from .prefab import RectBox
 from .pygame import BoxRenderer
@@ -17,7 +17,9 @@ class Grid(UniformGrid["Box"]):
         old_rect = Rect(self._old_rects[id(obj)])
         UniformGrid.remove_object(obj, old_rect)
         self._objects.remove(obj)
-    def update(self, obj: "Box") -> None:
+    def update(self, obj: "Box", *args: Any, **kwargs: Any) -> None:
+        if hasattr(obj, "update"):
+            obj.update(*args, **kwargs)
         UniformGrid.update(self, obj, obj.rect)
     def render_all(self) -> None:
         for box in self._objects:
