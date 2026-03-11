@@ -1,14 +1,9 @@
-# General test is variable to new tests. We customize for general tasks and try for new features with a new perspectiv over already tested and new features.
+# General test is variable to new tests. We customize for general tasks and try for new features with a new perspective over already tested and new features.
 
 from Rectangle import Rect, Color
-import Rectangle.pygame as rctngle_pg
-import Rectangle.pygame.physics as rctngle_phys
-import Rectangle.pygame.premade as rctngle_premade
-import Rectangle.pygame.keybinds as rctngle_kbnds
-import Rectangle.pygame.camera as rctngle_camera
-import Rectangle as rctngle
-import pygame
-import sys
+import Rectangle.pygame
+import Rectangle
+import pygame, sys
 
 pygame.init()
 
@@ -17,23 +12,23 @@ TARGET_FPS = 60.0
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 
+grid = Rectangle.pygame.physics.Grid(100, WIDTH, HEIGHT)
+camera = Rectangle.pygame.camera.Camera(grid)
+
 WHITE = Color(255, 255, 255)
 ORANGE = Color(255, 125, 0)
 
-grid = rctngle_phys.Grid(100, WIDTH, HEIGHT)
-camera = rctngle_camera.Camera(grid)
-
-player = rctngle_premade.Box(
+player = Rectangle.pygame.premade.Box(
     surface = screen, 
-    rect = Rect(WIDTH//2 - 50//2 - 200, 50, 50, 50), 
+    rect = Rect(WIDTH//2 - 25 - 200, 50, 50, 50), 
     color = ORANGE, 
     grid = grid
 )
 grid.add_object(player)
 
-wall = rctngle_phys.Box(
+wall = Rectangle.pygame.physics.Box(
     surface = screen, 
-    rect = Rect(WIDTH//2 - 50//2, 0, 50, HEIGHT), 
+    rect = Rect(WIDTH//2 - 25, 0, 50, HEIGHT), 
     color = ORANGE
 )
 grid.add_object(wall)
@@ -47,10 +42,11 @@ while active:
         player.handle_event(event)
     pressed_keys = pygame.key.get_pressed()
     screen.fill(WHITE)
-
-    grid.update(player, pressed_keys, delta_time)
-    camera.adjust_x(player, delta_time)
     
+    grid.update(player, pressed_keys, delta_time)
+    camera.adjust_x(player, delta_time, 200)
+    camera.adjust_y(player, delta_time, 200)
+
     grid.render_all()
     pygame.display.flip()
 
