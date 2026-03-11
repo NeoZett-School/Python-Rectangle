@@ -5,7 +5,7 @@ from ..core import Numeric, CoordinateLike, Coordinate
 class Camera:
     """The camera automatically handles moving around the world, instead of moving an object in the world."""
 
-    __all__ = ("_position", "_scale", "grid")
+    __all__ = ("_position", "grid")
 
     def __init__(self, grid: Grid) -> None:
         self._position = Coordinate(0, 0)
