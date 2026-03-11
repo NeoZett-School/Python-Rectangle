@@ -8,16 +8,17 @@ from .core import (
 
 class RectBox(Surface):
     @overload
-    def __init__(self, x: int, y: int, width: int, height: int, color: Optional[ColorLike] = None) -> None: ...
+    def __init__(self, x: int, y: int, width: int, height: int, color: Optional[ColorLike] = None, *, setup: bool = True) -> None: ...
     @overload
-    def __init__(self, rect: RectLike, color: Optional[ColorLike]) -> None: ...
-    def __init__(self, x: Union[int, RectLike], y: Optional[Union[int, ColorLike]] = None, width: Optional[int] = None, height: Optional[int] = None, color: Optional[ColorLike] = None) -> None:
+    def __init__(self, rect: RectLike, color: Optional[ColorLike], *, setup: bool = True) -> None: ...
+    def __init__(self, x: Union[int, RectLike], y: Optional[Union[int, ColorLike]] = None, width: Optional[int] = None, height: Optional[int] = None, color: Optional[ColorLike] = None, *, setup: bool = True) -> None:
         if isinstance(y, Sequence):
             color = y
         if y is None or width is None or height is None:
             x, y, width, height = x
         self.rect = Rect(x, y, width, height)
-        self.setup(int(width), int(height))
+        if setup:
+            self.setup(int(width), int(height))
         self._elements = []
         if color is not None:
             self.fill((color[0] << 16) | (color[1] << 8) | color[2])

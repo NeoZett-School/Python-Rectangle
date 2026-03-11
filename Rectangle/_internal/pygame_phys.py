@@ -32,7 +32,7 @@ class Box:
 
     __all__ = ("surface", "renderer")
     def __init__(self, surface: pygame.Surface, rect: Rect, color: ColorLike, use_detail: bool = False, cover_surface: Optional[pygame.Surface] = None) -> None:
-        self.surface = RectBox(rect, color)
+        self.surface = RectBox(rect, color, setup=use_detail)
         self.renderer = BoxRenderer(self.surface, surface, use_detail, cover_surface)
     @property
     def rect(self) -> Rect:

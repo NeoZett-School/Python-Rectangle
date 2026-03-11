@@ -23,11 +23,18 @@ grid = rctngle_phys.Grid(100, WIDTH, HEIGHT)
 
 player = rctngle_premade.Box(
     surface = screen, 
-    rect = Rect(WIDTH//2 - 50//2, 50, 50, 50), 
+    rect = Rect(WIDTH//2 - 50//2 - 200, 50, 50, 50), 
     color = ORANGE, 
     grid = grid
 )
 grid.add_object(player)
+
+wall = rctngle_phys.Box(
+    surface = screen, 
+    rect = Rect(WIDTH//2 - 50//2, 0, 50, HEIGHT), 
+    color = ORANGE
+)
+grid.add_object(wall)
 
 active = True
 while active:
