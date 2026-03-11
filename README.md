@@ -111,6 +111,7 @@ Rectangle/
 ├── __init__.py
 ├── core.py
 ├── prefab.py
+├── keybinds.py
 ├── spatial_grid.py
 ├── pygame.py
 ├── pygame_phys.py
@@ -121,6 +122,7 @@ Rectangle/
 └── _internal/
     ├── core.py
     ├── prefab.py
+    ├── keybinds.py
     ├── spatial_grid.py
     ├── pygame.py
     ├── pygame_phys.py
