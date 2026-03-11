@@ -25,3 +25,6 @@ class Camera:
     def adjust_x(self, player: PhysicsBox, delta_time: float, scroll_at: float = 200.0) -> None:
         if (player.rect.right >= player.renderer.pygame_surface.get_width() - scroll_at and player.velocity.x > 0) or (player.rect.left < scroll_at and player.velocity.x < 0):
             self.move(-player.velocity.x * delta_time, 0)
+    def adjust_y(self, player: PhysicsBox, delta_time: float, scroll_at: float = 300.0) -> None:
+        if (player.rect.bottom >= player.renderer.pygame_surface.get_height() - scroll_at and player.velocity.y > 0 and self._position.y < 0) or (player.rect.top < scroll_at and player.velocity.y < 0):
+            self.move(0, -player.velocity.y * delta_time)
