@@ -1,5 +1,5 @@
 from typing import Union, Optional, overload
-from .pygame_phys import Grid
+from .pygame_phys import Grid, PhysicsBox
 from .core import Numeric, CoordinateLike, Coordinate
 
 class Camera:
@@ -22,3 +22,6 @@ class Camera:
         for obj in self.grid:
             obj.rect.position += (dx, dy)
         self._position += (dx, dy)
+    def adjust_x(self, player: PhysicsBox, delta_time: float) -> None:
+        if (player.rect.right >= player.renderer.pygame_surface.get_height() - 200 and player.velocity.x > 0) or (player.rect.left < 200 and player.velocity.x < 0):
+            self.move(-player.velocity.x * delta_time, 0)

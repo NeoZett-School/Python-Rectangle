@@ -49,9 +49,7 @@ while active:
     screen.fill(WHITE)
 
     grid.update(player, pressed_keys, delta_time)
-
-    if (player.rect.right >= WIDTH - 200 and player.velocity.x > 0) or (player.rect.left < 200 and player.velocity.x < 0):
-        camera.move(-player.velocity.x * delta_time, 0)
+    camera.adjust_x(player, delta_time)
     
     grid.render_all()
     pygame.display.flip()
