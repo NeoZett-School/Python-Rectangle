@@ -5,6 +5,7 @@ import Rectangle.pygame as rctngle_pg
 import Rectangle.pygame_phys as rctngle_phys
 import Rectangle.pygame_phys_premade as rctngle_premade
 import Rectangle.keybinds as rctngle_kbnds
+import Rectangle.pygame_camera as rctngle_camera
 import Rectangle as rctngle
 import pygame
 import sys
@@ -20,6 +21,7 @@ WHITE = Color(255, 255, 255)
 ORANGE = Color(255, 125, 0)
 
 grid = rctngle_phys.Grid(100, WIDTH, HEIGHT)
+camera = rctngle_camera.Camera(grid)
 
 player = rctngle_premade.Box(
     surface = screen, 
@@ -47,6 +49,9 @@ while active:
     screen.fill(WHITE)
 
     grid.update(player, pressed_keys, delta_time)
+
+    if (player.rect.right >= WIDTH - 200 and player.velocity.x > 0) or (player.rect.left < 200 and player.velocity.x < 0):
+        camera.move(-player.velocity.x * delta_time, 0)
     
     grid.render_all()
     pygame.display.flip()
