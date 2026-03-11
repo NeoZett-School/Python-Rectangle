@@ -37,8 +37,9 @@ pip install pygame
 ### Pygame Example
 
 ```python
-from Rectangle import pygame_phys_premade as rtngle_phys_premade
 from Rectangle import Rect, Color
+import Rectangle.pygame
+import Rectangle
 import pygame
 import sys
 
@@ -51,7 +52,7 @@ clock = pygame.time.Clock()
 WHITE = Color(255, 255, 255)
 ORANGE = Color(255, 125, 0)
 
-box = rtngle_phys_premade.Box(
+box = Rectangle.pygame.premade.Box(
     surface=screen, 
     rect=Rect(10, 10, 50, 50), 
     color=ORANGE, 
