@@ -18,6 +18,7 @@ class Grid(UniformGrid["Box"]):
         UniformGrid.remove_object(obj, old_rect)
         self._objects.remove(obj)
     def update(self, obj: "Box", *args: Any, **kwargs: Any) -> None:
+        """Update an object's position in the grid. If arguments are provided and not empty, they will be passed into the object's 'update' method if it exists."""
         if hasattr(obj, "update") and args or kwargs:
             obj.update(*args, **kwargs)
         UniformGrid.update(self, obj, obj.rect)
