@@ -53,7 +53,6 @@ class SpatialGrid:
         SpatialGrid.add_object(self, obj, new_rect)
 
 class UniformGrid(Generic[T], SpatialGrid):
-    cells: Dict[Tuple[Numeric, Numeric], List[T]]
     def add_object(self, obj: T, rect: Rect) -> None: 
         SpatialGrid.add_object(self, obj, rect)
     def remove_object(self, obj: T, rect: Rect) -> None: 
